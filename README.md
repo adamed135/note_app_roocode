@@ -1,28 +1,27 @@
+# 📝 Notes & Task Management
 
- - Notes & Task Management
- 
-A Modern Flutter & Android App for Notes & Task Management.
-✨ Core Features
-🔔 Smart Reminders: Instant notifications for Done and Undone tasks to keep you on track.
+A modern **Flutter** app for notes & task management, fully offline with fast local storage.
 
-🌐 3 Languages (AR / EN / FR): Full multilingual support with seamless RTL/LTR layout switching.
+## ✨ Core Features
 
-📁 Multi-Format Saving: Save and organize notes with support for different file formats.
+- 🔔 **Smart Reminders** — Instant notifications for tasks with due dates, plus automatic alerts for overdue tasks to keep you on track.
+- 🌐 **3 Languages (AR / EN / FR)** — Full multilingual support with seamless RTL/LTR layout switching.
+- 📁 **Multi-Format Saving** — Save and organize notes with text and image attachments.
+- ⚡ **Hive Local Storage** — Ultra-fast, lightweight, and works **100% offline** (no internet required).
+- 🎨 **Modern Flutter UI** — Beautiful, responsive design that adapts to any Android screen size (phones & tablets).
 
-⚡ Hive Local Storage: Ultra-fast, lightweight, and works 100% Offline (No internet required).
+## 🛠️ Tech Stack
 
-🎨 Modern Flutter UI: Beautiful, responsive design that adapts perfectly to any Android screen size (Phones & Tablets).
+| | |
+|---|---|
+| **Framework** | Flutter (Android) |
+| **Database** | Hive DB (local & fast) |
+| **Localization** | AR / EN / FR |
+| **Notifications** | flutter_local_notifications |
 
-🛠️ Tech Stack
-Framework: Flutter (Android)
+## 📱 Demo & Screenshots
 
-Database: Hive DB (Local & Fast)
-
-Localization: AR / EN / FR
-
-Notifications: Flutter Local Notifications
-
-- this is the full video of the app;
+This is the full video of the app:
 
 https://github.com/user-attachments/assets/7480d6fb-9424-43e1-9633-102a03cbdc88
 
@@ -42,5 +41,99 @@ https://github.com/user-attachments/assets/7480d6fb-9424-43e1-9633-102a03cbdc88
 
 <img width="108" height="240" alt="Screenshot_2026-01-02-21-31-11-685_com example note_app_roocode" src="https://github.com/user-attachments/assets/41b2fc3b-e442-4742-a4ed-96aa3c1b6e99" />
 
+## 🚀 Getting Started
 
+### Prerequisites
 
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) **3.35.0 or newer**
+- Dart SDK **3.9.0 or newer** (bundled with Flutter)
+- Android Studio (or Android SDK + a connected device/emulator)
+- Git
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Modern-tech111/notes_and_tasks_management_app.git
+cd notes_and_tasks_management_app
+```
+
+### 2. Install dependencies
+
+```bash
+flutter pub get
+```
+
+### 3. Run the app
+
+```bash
+flutter run
+```
+
+The app will launch on your connected device or emulator. You can also pick a target explicitly:
+
+```bash
+flutter devices          # list available devices
+flutter run -d <device>  # run on a specific device
+```
+
+## 📦 Building a Release
+
+### Signed APK
+
+```bash
+flutter build apk --release
+```
+
+The signed APK is written to `build/app/outputs/flutter-apk/app-release.apk`.
+
+### App Bundle (AAB) — recommended for Google Play
+
+```bash
+flutter build appbundle --release
+```
+
+The bundle is written to `build/app/outputs/bundle/release/app-release.aab`.
+
+### Release signing (Android)
+
+Release builds are signed with an upload keystore configured through `android/key.properties`:
+
+```properties
+storePassword=<your store password>
+keyPassword=<your key password>
+keyAlias=<your alias>
+storeFile=<path to your .jks keystore>
+```
+
+> ⚠️ **Security:** `key.properties` and the keystore file (`.jks`) are **gitignored** — never commit them. They must be copied manually onto any machine where you build a release. If they're missing, the build falls back to the debug key so `flutter run --release` still works for local testing.
+
+### Tests
+
+```bash
+flutter test
+```
+
+## 📁 Project Structure
+
+```
+lib/
+├── main.dart                 # App entry point, Hive & notifications setup
+├── models/                   # Note & Task Hive models
+├── screens/                  # Splash, Home, Notes, Tasks, Settings, Add/Edit screens
+├── generated/                # Auto-generated localization files (AR/EN/FR)
+└── l10n/                     # ARB translation sources
+android/                      # Android host project (application ID: com.moderntech.notes_tasks)
+ios/                          # iOS host project
+```
+
+Localization sources live in `lib/l10n/` (configured via `l10n.yaml`). After editing the ARB files, regenerate the Dart bindings with:
+
+```bash
+flutter gen-l10n
+```
+
+## 🧪 App Details
+
+- **Application ID (Android):** `com.moderntech.notes_tasks`
+- **Version:** 1.0.0+1
+- **Languages:** العربية (AR) · English (EN) · Français (FR)
