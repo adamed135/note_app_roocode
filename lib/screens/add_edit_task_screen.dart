@@ -61,10 +61,10 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
 
     // Schedule notification if due date is set and notifications are enabled
     bool notificationsEnabled = Hive.box('settingsBox').get('notificationsEnabled', defaultValue: true);
-    print('Notifications enabled: $notificationsEnabled, dueDate: $dueDate');
+    debugPrint('Notifications enabled: $notificationsEnabled, dueDate: $dueDate');
     if (dueDate != null && notificationsEnabled) {
       if (dueDate!.isAfter(DateTime.now())) {
-        print('Scheduling notification for ${tz.TZDateTime.from(dueDate!, tz.local)}');
+        debugPrint('Scheduling notification for ${tz.TZDateTime.from(dueDate!, tz.local)}');
         FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
         const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
           'task_channel',
@@ -86,15 +86,16 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
             platformChannelSpecifics,
             androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
           );
-          print('Notification scheduled successfully');
+          debugPrint('Notification scheduled successfully');
         } catch (e) {
-          print('Error scheduling notification: $e');
+          debugPrint('Error scheduling notification: $e');
         }
       } else {
-        print('Due date is in the past, not scheduling notification');
+        debugPrint('Due date is in the past, not scheduling notification');
       }
     }
 
+    if (!mounted) return;
     Navigator.pop(context);
   }
 
@@ -181,7 +182,9 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
                 );
                 if (confirm == true) {
                   widget.task!.delete();
-                  Navigator.pop(context);
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
                 }
               },
             ),
@@ -195,7 +198,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).colorScheme.background,
+              Theme.of(context).colorScheme.surfaceContainerLow,
               Theme.of(context).colorScheme.surface,
             ],
             begin: Alignment.topLeft,

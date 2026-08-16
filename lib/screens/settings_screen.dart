@@ -64,7 +64,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).colorScheme.background,
+              Theme.of(context).colorScheme.surfaceContainerLow,
               Theme.of(context).colorScheme.surface,
             ],
             begin: Alignment.topLeft,
@@ -82,7 +82,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: Text(AppLocalizations.of(context)!.enableNotifications),
                   subtitle: Text(AppLocalizations.of(context)!.receiveNotifications),
                   value: enabled,
-                  activeColor: Colors.green,
+                  activeThumbColor: Colors.green,
                   inactiveThumbColor: Colors.red,
                   onChanged: (bool value) {
                     settingsBox.put('notificationsEnabled', value);

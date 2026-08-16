@@ -79,7 +79,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).colorScheme.background,
+              Theme.of(context).colorScheme.surfaceContainerLow,
               Theme.of(context).colorScheme.surface,
             ],
             begin: Alignment.topLeft,

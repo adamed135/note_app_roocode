@@ -53,7 +53,7 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Theme.of(context).colorScheme.background,
+                  Theme.of(context).colorScheme.surfaceContainerLow,
                   Theme.of(context).colorScheme.surface,
                 ],
                 begin: Alignment.topLeft,
@@ -156,7 +156,7 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                   },
                 )
               : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

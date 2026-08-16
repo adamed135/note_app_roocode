@@ -27,7 +27,7 @@ class _NotesScreenState extends State<NotesScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).colorScheme.background,
+              Theme.of(context).colorScheme.surfaceContainerLow,
               Theme.of(context).colorScheme.surface,
             ],
             begin: Alignment.topLeft,
@@ -102,6 +102,11 @@ class _NotesScreenState extends State<NotesScreen> {
                                           width: 50,
                                           height: 50,
                                           fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  const Icon(
+                                                      Icons.image_not_supported,
+                                                      size: 50),
                                         ),
                                       )
                                     : const Icon(Icons.image_not_supported,
@@ -153,6 +158,11 @@ class _NotesScreenState extends State<NotesScreen> {
                                           width: 50,
                                           height: 50,
                                           fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  const Icon(
+                                                      Icons.image_not_supported,
+                                                      size: 50),
                                         ),
                                       )
                                     : const Icon(Icons.image_not_supported,

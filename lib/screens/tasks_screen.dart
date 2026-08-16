@@ -17,7 +17,7 @@ class TasksScreen extends StatefulWidget {
 class _TasksScreenState extends State<TasksScreen> {
   String searchText = '';
   String filter = 'all'; // all, pending, completed
-  Set<int> _previouslyOverdue = {};
+  final Set<int> _previouslyOverdue = {};
 
   @override
   void initState() {
@@ -86,7 +86,7 @@ class _TasksScreenState extends State<TasksScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).colorScheme.background,
+              Theme.of(context).colorScheme.surfaceContainerLow,
               Theme.of(context).colorScheme.surface,
             ],
             begin: Alignment.topLeft,

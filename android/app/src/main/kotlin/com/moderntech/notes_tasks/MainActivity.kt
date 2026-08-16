@@ -1,4 +1,4 @@
-package com.example.note_app_roocode
+package com.moderntech.notes_tasks
 
 import io.flutter.embedding.android.FlutterActivity
 
