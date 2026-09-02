@@ -21,13 +21,24 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
     final locale = Localizations.localeOf(context);
     switch (locale.languageCode) {
       case 'en':
-        return AppLocalizations.of(context)!.english;
+        return '🇺🇸 ${AppLocalizations.of(context)!.english}';
       case 'fr':
-        return AppLocalizations.of(context)!.french;
+        return '🇫🇷 ${AppLocalizations.of(context)!.french}';
       case 'ar':
-        return AppLocalizations.of(context)!.arabic;
+        return '🇸🇦 ${AppLocalizations.of(context)!.arabic}';
       default:
-        return AppLocalizations.of(context)!.english;
+        return '🇺🇸 ${AppLocalizations.of(context)!.english}';
+    }
+  }
+
+  String _getCurrentThemeName() {
+    switch (MyApp.getThemeMode()) {
+      case ThemeMode.dark:
+        return AppLocalizations.of(context)!.dark;
+      case ThemeMode.system:
+        return AppLocalizations.of(context)!.system;
+      default:
+        return AppLocalizations.of(context)!.light;
     }
   }
 
@@ -98,15 +109,48 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                       items: const [
                         DropdownMenuItem(
                           value: 'en',
-                          child: Text('English'),
+                          child: Text('🇺🇸 English'),
                         ),
                         DropdownMenuItem(
                           value: 'fr',
-                          child: Text('Français'),
+                          child: Text('🇫🇷 Français'),
                         ),
                         DropdownMenuItem(
                           value: 'ar',
-                          child: Text('العربية'),
+                          child: Text('🇸🇦 العربية'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: Icon(Icons.dark_mode_outlined),
+                    title: Text(AppLocalizations.of(context)!.theme),
+                    subtitle: Text(_getCurrentThemeName()),
+                    trailing: DropdownButton<ThemeMode>(
+                      value: MyApp.getThemeMode(),
+                      dropdownColor: Theme.of(context).colorScheme.surface,
+                      underline: const SizedBox(),
+                      onChanged: (ThemeMode? newValue) {
+                        if (newValue != null) {
+                          MyApp.setThemeMode(newValue);
+                        }
+                      },
+                      items: [
+                        DropdownMenuItem(
+                          value: ThemeMode.system,
+                          child: Text(
+                              '🌗 ${AppLocalizations.of(context)!.system}'),
+                        ),
+                        DropdownMenuItem(
+                          value: ThemeMode.light,
+                          child: Text(
+                              '☀️ ${AppLocalizations.of(context)!.light}'),
+                        ),
+                        DropdownMenuItem(
+                          value: ThemeMode.dark,
+                          child: Text(
+                              '🌙 ${AppLocalizations.of(context)!.dark}'),
                         ),
                       ],
                     ),

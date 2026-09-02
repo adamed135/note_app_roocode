@@ -4,9 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import '../models/task.dart';
-import '../main.dart';
 
-// Assuming NotificationOffset is imported from task.dart, but since it's the same file, it's fine.
 
 class AddEditTaskScreen extends StatefulWidget {
   final Task? task;
@@ -29,6 +27,10 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
       titleController.text = widget.task!.title;
       descriptionController.text = widget.task!.description;
       dueDate = widget.task!.dueDate;
+      // Restore dueTime from the stored dueDate so the time picker shows the correct value
+      if (dueDate != null) {
+        dueTime = TimeOfDay.fromDateTime(dueDate!);
+      }
     }
   }
 
@@ -61,10 +63,29 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
 
     // Schedule notification if due date is set and notifications are enabled
     bool notificationsEnabled = Hive.box('settingsBox').get('notificationsEnabled', defaultValue: true);
-    debugPrint('Notifications enabled: $notificationsEnabled, dueDate: $dueDate');
     if (dueDate != null && notificationsEnabled) {
-      if (dueDate!.isAfter(DateTime.now())) {
-        debugPrint('Scheduling notification for ${tz.TZDateTime.from(dueDate!, tz.local)}');
+      // Combine date and time: if user picked only a date, default to a sensible time
+      DateTime notificationDateTime = dueDate!;
+      if (dueTime != null) {
+        notificationDateTime = DateTime(
+          dueDate!.year,
+          dueDate!.month,
+          dueDate!.day,
+          dueTime!.hour,
+          dueTime!.minute,
+        );
+      } else if (notificationDateTime.hour == 0 && notificationDateTime.minute == 0) {
+        // Date was picked from date picker (defaults to midnight) — set to 9 AM
+        notificationDateTime = DateTime(
+          dueDate!.year,
+          dueDate!.month,
+          dueDate!.day,
+          9,
+          0,
+        );
+      }
+
+      if (notificationDateTime.isAfter(DateTime.now())) {
         FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
         const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
           'task_channel',
@@ -73,25 +94,23 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
           importance: Importance.max,
           priority: Priority.high,
           showWhen: false,
-          icon: '@mipmap/ic_launcher',
+          icon: '@drawable/ic_notification',
+          largeIcon: DrawableResourceAndroidBitmap('@mipmap/launcher_icon'),
         );
         const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
 
         try {
           await flutterLocalNotificationsPlugin.zonedSchedule(
             savedTask.key, // Use key as ID
-            MyApp.getLocalizedTaskReminder(),
+            'Task Reminder',
             savedTask.title,
-            tz.TZDateTime.from(dueDate!, tz.local),
+            tz.TZDateTime.from(notificationDateTime, tz.local),
             platformChannelSpecifics,
-            androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+            androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
           );
-          debugPrint('Notification scheduled successfully');
         } catch (e) {
-          debugPrint('Error scheduling notification: $e');
+          // Silently fail in release — notification will not fire
         }
-      } else {
-        debugPrint('Due date is in the past, not scheduling notification');
       }
     }
 

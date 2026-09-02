@@ -37,6 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       importance: Importance.max,
       priority: Priority.high,
       showWhen: false,
+      icon: '@drawable/ic_notification',
     );
     const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
 

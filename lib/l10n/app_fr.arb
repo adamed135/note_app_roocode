@@ -32,5 +32,9 @@
   "english": "Anglais",
   "french": "Français",
   "arabic": "Arabe",
-  "language": "Langue"
+  "language": "Langue",
+  "theme": "Thème",
+  "system": "Système",
+  "light": "Clair",
+  "dark": "Sombre"
 }

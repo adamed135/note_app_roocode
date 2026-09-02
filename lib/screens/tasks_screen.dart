@@ -38,7 +38,8 @@ class _TasksScreenState extends State<TasksScreen> {
         importance: Importance.high,
         priority: Priority.high,
         showWhen: false,
-        icon: '@mipmap/ic_launcher',
+        icon: '@drawable/ic_notification',
+        largeIcon: DrawableResourceAndroidBitmap('@mipmap/launcher_icon'),
       );
       const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
 
@@ -52,15 +53,15 @@ class _TasksScreenState extends State<TasksScreen> {
   }
 
   void _showOverdueNotification(Task task) async {
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();      const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'overdue_channel',
       'Overdue Tasks',
       channelDescription: 'Notifications for overdue tasks',
       importance: Importance.high,
       priority: Priority.high,
       showWhen: false,
-      icon: '@mipmap/ic_launcher',
+      icon: '@drawable/ic_notification',
+      largeIcon: DrawableResourceAndroidBitmap('@mipmap/launcher_icon'),
     );
     const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
 

@@ -32,5 +32,9 @@
   "english": "English",
   "french": "Français",
   "arabic": "العربية",
-  "language": "Language"
+  "language": "Language",
+  "theme": "Theme",
+  "system": "System",
+  "light": "Light",
+  "dark": "Dark"
 }

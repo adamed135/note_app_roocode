@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Keeps notification resources referenced only at runtime.
+     The Flutter Gradle plugin enables R8 resource shrinking for release
+     builds by default. Resources referenced via getIdentifier() from Dart
+     code (flutter_local_notifications icons) are invisible to the shrinker
+     and get stripped, silently breaking notifications. See:
+     https://developer.android.com/topic/performance/app-optimization/customize-which-resources-to-keep -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_notification,@mipmap/launcher_icon" />
