@@ -248,12 +248,18 @@ class MyAppState extends State<MyApp> {
       ),
 
       // Update AppBar theme: keep status-bar icons readable on the AppBar
-      // while drawing edge-to-edge behind the system bars.
+      // while drawing edge-to-edge behind the system bars. The navigation-bar
+      // color is set explicitly here so it always matches the active theme
+      // (white/dark) and can never be left over from the green splash.
       appBarTheme: AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
           statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
+          systemNavigationBarColor:
+              isDark ? const Color(0xFF1E1E1E) : Colors.white,
+          systemNavigationBarIconBrightness:
+              isDark ? Brightness.light : Brightness.dark,
         ),
       ),
 

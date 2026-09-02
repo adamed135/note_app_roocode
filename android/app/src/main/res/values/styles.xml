@@ -13,7 +13,9 @@
 
          This Theme is only used starting with V2 of Flutter's Android embedding. -->
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
-        <item name="android:windowBackground">@color/launch_background</item>
+        <!-- Neutral white window: never use the green splash color here, so it
+             can't bleed into the system navigation bar area. -->
+        <item name="android:windowBackground">@android:color/white</item>
         <!-- Light navigation bar (dark buttons/icons) matching the app, so no
              black strip is ever shown behind the system bar. -->
         <item name="android:windowLightNavigationBar">true</item>

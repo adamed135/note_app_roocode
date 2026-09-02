@@ -48,15 +48,15 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    // The splash uses a green background, so force white status-bar icons
-    // and a matching green navigation bar here (the rest of the app is light).
+    // The splash uses a green background, so force white status-bar icons here.
+    // NOTE: do NOT set the navigation-bar color in this region — the bottom
+    // system bar must always follow the selected theme (white/dark), not the
+    // green splash. Otherwise the green leaks into the nav bar and persists.
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFF4CAF50),
-        systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
         backgroundColor: const Color(0xFF4CAF50),
